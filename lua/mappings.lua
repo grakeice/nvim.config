@@ -100,7 +100,9 @@ map("n", "<leader>tn", function()
   end
 end, { desc = "Toggle line number mode" })
 
--- 探す
+-- Telescope
 key.add {
-  { "<leader>f", icon = "󱎸", desc = "Search" },
+  { "<leader>f", icon = "󰭎", desc = "Telescope" },
 }
+
+vim.keymap.del("n", "<leader>fm")
