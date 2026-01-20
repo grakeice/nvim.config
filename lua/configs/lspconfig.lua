@@ -40,6 +40,26 @@ vim.lsp.config("vtsls", {
   },
 })
 
+vim.lsp.config("vue_ls", {
+  settings = {
+    css = {
+      lint = {
+        unknownAtRules = "ignore",
+      },
+    },
+  },
+})
+
+vim.lsp.config("cssls", {
+  settings = {
+    css = {
+      lint = {
+        unknownAtRules = "ignore",
+      },
+    },
+  },
+})
+
 require("mason").setup()
 require("mason-lspconfig").setup()
 -- read :h vim.lsp.config for changing options of lsp servers

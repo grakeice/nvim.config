@@ -58,11 +58,13 @@ map("n", "<leader>la", function()
 end, { desc = "LSP code action" })
 
 map("n", "<leader>lA", function()
-  vim.lsp.buf.code_action { context = { only = { "source" }, diagnostics = {} } }
+  vim.lsp.buf.code_action { context = { only = { "source" }, diagnostics = vim.lsp.diagnostic.get_line_diagnostics() } }
 end, { desc = "LSP source action" })
 
--- 現在のファイルのエラー一覧を表示
-map("n", "<leader>ld", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "LSP diagnostics (Current file)" })
+-- カーソル位置のエラーを表示
+map("n", "<leader>ld", function()
+  vim.diagnostic.open_float { scope = "cursor", border = "rounded" }
+end, { desc = "LSP diagnostics" })
 
 -- プロジェクト全体のエラー一覧を表示
 map("n", "<leader>lD", "<cmd>Telescope diagnostics<CR>", { desc = "LSP diagnostics (Workspace)" })
