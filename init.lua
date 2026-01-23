@@ -1,6 +1,14 @@
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
 vim.g.mapleader = " "
 
+-- Check if running in VSCode
+if vim.g.vscode then
+  -- VSCode Neovim extension - skip NvChad plugins
+  local map = vim.keymap.set
+  map("n", "<leader>w", "<cmd>w<cr>", { desc = "保存" })
+  return
+end
+
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 

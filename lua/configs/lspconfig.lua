@@ -60,6 +60,21 @@ vim.lsp.config("cssls", {
   },
 })
 
+vim.lsp.config("tailwindcss", {
+  settings = {
+    tailwindCSS = {
+      classFunctions = {
+        "cn",
+        "cva",
+        "tv",
+        "clsx",
+        "tw",
+        "twMerge",
+      },
+    },
+  },
+})
+
 require("mason").setup()
 require("mason-lspconfig").setup()
 -- read :h vim.lsp.config for changing options of lsp servers

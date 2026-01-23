@@ -106,3 +106,15 @@ key.add {
 }
 
 vim.keymap.del("n", "<leader>fm")
+
+-- Copilot
+key.add {
+  { "<leader>c", icon = "", desc = "Copilot" },
+}
+
+map("n", "<leader>co", function()
+  require("CopilotChat").open {
+    sticky = { "#buffer:active" },
+    auto_insert_mode = true,
+  }
+end, { desc = "Copilot Chatを開く" })
