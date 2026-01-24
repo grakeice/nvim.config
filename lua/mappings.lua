@@ -5,6 +5,7 @@ local conform = require "conform"
 
 local map = vim.keymap.set
 local key = require "which-key"
+local picker = require "snacks.picker"
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
@@ -67,7 +68,9 @@ map("n", "<leader>ld", function()
 end, { desc = "LSP diagnostics" })
 
 -- プロジェクト全体のエラー一覧を表示
-map("n", "<leader>lD", "<cmd>Telescope diagnostics<CR>", { desc = "LSP diagnostics (Workspace)" })
+map("n", "<leader>lD", function()
+  picker.diagnostics()
+end, { desc = "LSP diagnostics (Workspace)" })
 
 map("n", "<leader>lf", function()
   conform.format()
@@ -106,6 +109,38 @@ key.add {
 }
 
 vim.keymap.del("n", "<leader>fm")
+
+map("n", "<leader>fw", function()
+  picker.grep()
+end, { desc = "Live grep" })
+
+map("n", "<leader>ff", function()
+  picker.files()
+end, { desc = "Find files" })
+
+map("n", "<leader>fa", function()
+  picker.files { ignored = true, hidden = true }
+end, { desc = "Find all files" })
+
+map("n", "<leader>fo", function()
+  picker.recent()
+end, { desc = "Find recent files" })
+
+map("n", "<leader>fz", function()
+  picker.lines()
+end, { desc = "Find in current buffer" })
+
+map("n", "<leader>fh", function()
+  picker.help()
+end, { desc = "Find helps" })
+
+map("n", "<leader>fb", function()
+  picker.buffers()
+end, { desc = "Find buffers" })
+
+map("n", "<leader><space>", function()
+  picker.smart()
+end, { desc = "Smart Finder" })
 
 -- Copilot
 key.add {
