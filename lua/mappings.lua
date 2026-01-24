@@ -16,7 +16,7 @@ map("n", "K", function()
 end)
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 map("n", "<leader>w", "<cmd> w <cr>")
-
+map("n", "<leader>q", "<cmd> q <cr>")
 -- 移動関連
 
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
