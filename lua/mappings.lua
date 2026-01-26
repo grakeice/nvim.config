@@ -170,3 +170,24 @@ map("n", "<leader>jj", function()
     },
   })
 end, { desc = "Open jjui with Snacks" })
+
+map("n", "<leader>jd", function()
+  Snacks.input({
+    prompt = "describe",
+  }, function(input)
+    if input and input ~= "" then
+      local cmd = "jj describe -m" .. '"' .. input .. '"'
+      Snacks.terminal.toggle(cmd, {
+        win = { style = "terminal", border = "rounded" },
+        auto_close = false,
+      })
+    end
+  end)
+end, { desc = "jj describe" })
+
+map("n", "<leader>jn", function()
+  Snacks.terminal.toggle("jj new", {
+    win = { style = "terminal", border = "rounded" },
+    auto_close = false,
+  })
+end, { desc = "jj new" })
