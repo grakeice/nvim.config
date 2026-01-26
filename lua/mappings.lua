@@ -6,6 +6,7 @@ local conform = require "conform"
 local map = vim.keymap.set
 local key = require "which-key"
 local picker = require "snacks.picker"
+local Snacks = require "snacks"
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
@@ -153,3 +154,19 @@ map("n", "<leader>co", function()
     auto_insert_mode = true,
   }
 end, { desc = "Copilot Chatを開く" })
+
+-- jujutsu
+key.add {
+  { "<leader>j", icon = "", desc = "Jujutsu VCS" },
+}
+
+map("n", "<leader>jj", function()
+  Snacks.terminal.toggle("jjui", {
+    win = {
+      style = "terminal", -- Snacks標準のターミナルスタイル
+      border = "rounded", -- 角丸のボーダー
+      width = 0.8, -- 画面幅の80%
+      height = 0.8, -- 画面高さの80%
+    },
+  })
+end, { desc = "Open jjui with Snacks" })
