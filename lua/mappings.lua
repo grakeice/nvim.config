@@ -163,22 +163,23 @@ key.add {
 map("n", "<leader>jj", function()
   Snacks.terminal.toggle("jjui", {
     win = {
-      style = "terminal", -- Snacks標準のターミナルスタイル
-      border = "rounded", -- 角丸のボーダー
-      width = 0.8, -- 画面幅の80%
-      height = 0.8, -- 画面高さの80%
+      style = "terminal",
+      border = "rounded",
     },
   })
 end, { desc = "Open jjui with Snacks" })
 
 map("n", "<leader>jd", function()
   Snacks.input({
-    prompt = "describe",
+    prompt = "jj describe: Input description...",
   }, function(input)
     if input and input ~= "" then
       local cmd = "jj describe -m" .. '"' .. input .. '"'
       Snacks.terminal.toggle(cmd, {
-        win = { style = "terminal", border = "rounded" },
+        win = {
+          style = "terminal",
+          border = "rounded",
+        },
         auto_close = false,
       })
     end
@@ -186,8 +187,25 @@ map("n", "<leader>jd", function()
 end, { desc = "jj describe" })
 
 map("n", "<leader>jn", function()
-  Snacks.terminal.toggle("jj new", {
-    win = { style = "terminal", border = "rounded" },
+  Snacks.input({ prompt = "jj new: Input description..." }, function(input)
+    local cmd = input and input ~= "" and "jj new -m" .. '"' .. input .. '"' or "jj new"
+
+    Snacks.terminal.toggle(cmd, {
+      win = {
+        style = "terminal",
+        border = "rounded",
+      },
+      auto_close = false,
+    })
+  end)
+end, { desc = "jj new" })
+
+map("n", "<leader>jl", function()
+  Snacks.terminal.toggle("jj log", {
+    win = {
+      style = "terminal",
+      border = "rounded",
+    },
     auto_close = false,
   })
-end, { desc = "jj new" })
+end, { desc = "jj log" })
