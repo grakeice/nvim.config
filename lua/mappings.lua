@@ -49,6 +49,26 @@ key.add {
 
 map("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 
+map("n", "<leader>gi", function()
+  Snacks.picker.gh_issue()
+end, { desc = "GitHub Issues (open)" })
+
+map("n", "<leader>gI", function()
+  Snacks.picker.gh_issue { state = "all" }
+end, { desc = "GitHub Issues (all)" })
+
+map("n", "<leader>gp", function()
+  Snacks.picker.gh_pr()
+end, { desc = "GitHub Pull Requests (open)" })
+
+map("n", "<leader>gP", function()
+  Snacks.picker.gh_pr { state = "all" }
+end, { desc = "GitHub Pull Requests (all)" })
+
+map("n", "<leader>gb", function()
+  vim.fn.system { "gh", "browse" }
+end, { desc = "Open the repositry in a browser" })
+
 -- Lsp関連
 
 key.add {
