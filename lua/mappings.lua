@@ -229,3 +229,13 @@ map("n", "<leader>jl", function()
     auto_close = false,
   })
 end, { desc = "jj log" })
+
+map("n", "<leader>jc", function()
+  Snacks.terminal.toggle("jj commit", {
+    win = {
+      style = "terminal",
+      border = "rounded",
+    },
+    auto_close = false,
+  })
+end, { desc = "jj commit" })
