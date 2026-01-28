@@ -75,6 +75,25 @@ vim.lsp.config("tailwindcss", {
   },
 })
 
+vim.lsp.config("jsonls", {
+  filetypes = { "json", "jsonc" },
+  settings = {
+    json = {
+      schemas = {
+        { fileMatch = { "package.json" }, url = "https://json.schemastore.org/package.json" },
+        { fileMatch = { "tsconfig*.json" }, url = "https://json.schemastore.org/tsconfig.json" },
+      },
+    },
+  },
+})
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "bun.lock",
+  callback = function()
+    vim.bo.filetype = "jsonc"
+  end,
+})
+
 require("mason").setup()
 require("mason-lspconfig").setup()
 -- read :h vim.lsp.config for changing options of lsp servers
