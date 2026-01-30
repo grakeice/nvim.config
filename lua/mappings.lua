@@ -49,6 +49,11 @@ map("n", "<leader><space>", function()
   end
 end, { desc = "File explorer (overlay)" })
 
+-- Zen Mode
+map("n", "<leader><cr>", function()
+  Snacks.zen()
+end, { desc = "Toggle Zen Mode" })
+
 -- 移動関連
 
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
