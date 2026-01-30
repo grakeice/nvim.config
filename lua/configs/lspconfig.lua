@@ -18,6 +18,9 @@ vim.lsp.config("vtsls", {
       },
     },
     typescript = {
+      preferences = {
+        jsxAttributeCompletionStyle = "braces",
+      },
       inlayHints = {
         parameterNames = { enabled = "all" },
         parameterTypes = { enabled = true },
@@ -28,6 +31,9 @@ vim.lsp.config("vtsls", {
       },
     },
     javascript = {
+      preferences = {
+        jsxAttributeCompletionStyle = "braces",
+      },
       inlayHints = {
         parameterNames = { enabled = "all" },
         parameterTypes = { enabled = true },
