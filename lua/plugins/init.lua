@@ -102,7 +102,7 @@ return {
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
       bigfile = { enabled = true },
-      explorer = { enabled = false },
+      explorer = { enabled = true, trash = true, replace_netrw = true },
       indent = { enabled = true, animate = { enabled = true } },
       input = { enabled = true },
       picker = { enabled = true, ui_select = true },

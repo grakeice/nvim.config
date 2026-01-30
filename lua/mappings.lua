@@ -5,8 +5,8 @@ local conform = require "conform"
 
 local map = vim.keymap.set
 local key = require "which-key"
-local picker = require "snacks.picker"
 local Snacks = require "snacks"
+local picker = Snacks.picker
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
@@ -18,6 +18,37 @@ end)
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 map("n", "<leader>w", "<cmd> w <cr>")
 map("n", "<leader>q", "<cmd> q <cr>")
+map("n", "<leader>e", function()
+  -- 1. 起動中のexplorerインスタンスをリストで取得
+  local explorers = Snacks.picker.get { source = "explorer" }
+
+  -- 2. 1つ以上見つかれば、最初のやつの入力ウィンドウにフォーカス
+  if #explorers > 0 then
+    explorers[1].list.win:focus()
+  else
+    -- 3. なければ新しく開く
+    Snacks.explorer()
+  end
+end, { desc = "Open explorer" })
+
+-- Sidebar形式のexplorer
+map("n", "<leader>o", function()
+  Snacks.explorer()
+end, { desc = "Toggle explorer" })
+-- Overlayなexplorer
+map("n", "<leader><space>", function()
+  -- 1. 起動中のexplorerインスタンスをリストで取得
+  local explorers = Snacks.picker.get { source = "explorer" }
+
+  -- 2. 1つ以上見つかれば、最初のやつの入力ウィンドウにフォーカス
+  if #explorers > 0 then
+    explorers[1].list.win:focus()
+  else
+    -- 3. なければ新しく開く
+    Snacks.explorer { layout = "default", auto_close = true }
+  end
+end, { desc = "File explorer (overlay)" })
+
 -- 移動関連
 
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -159,7 +190,7 @@ map("n", "<leader>fb", function()
   picker.buffers()
 end, { desc = "Find buffers" })
 
-map("n", "<leader><space>", function()
+map("n", "<leader>fs", function()
   picker.smart()
 end, { desc = "Smart Finder" })
 
