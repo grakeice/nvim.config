@@ -66,6 +66,23 @@ vim.lsp.config("cssls", {
   },
 })
 
+vim.lsp.config("eslint", {
+  on_attach = function()
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      callback = function()
+        vim.lsp.buf.code_action {
+          context = {
+            ---@diagnostic disable-next-line: assign-type-mismatch
+            only = { "source.fixAll.eslint" },
+            diagnostics = {},
+          },
+          apply = true,
+        }
+      end,
+    })
+  end,
+})
+
 vim.lsp.config("tailwindcss", {
   settings = {
     tailwindCSS = {
