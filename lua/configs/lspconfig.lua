@@ -66,10 +66,13 @@ vim.lsp.config("cssls", {
   },
 })
 
+local eslint_group = vim.api.nvim_create_augroup("EslintFixOnSave", { clear = true })
 vim.lsp.config("eslint", {
   on_attach = function(_, bufnr)
+    vim.api.nvim_clear_autocmds { group = eslint_group, buffer = bufnr }
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = bufnr,
+      group = eslint_group,
       callback = function()
         vim.lsp.buf.code_action {
           context = {
