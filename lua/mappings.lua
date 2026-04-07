@@ -8,13 +8,11 @@ local key = require "which-key"
 local Snacks = require "snacks"
 local picker = Snacks.picker
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jk", "<ESC>")
 map("n", "K", function()
   vim.lsp.buf.hover {
     border = "rounded",
   }
-end)
+end, { desc = "LSP Hover" })
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 map("n", "<leader>w", "<cmd> w <cr>")
 map("n", "<leader>q", "<cmd> q <cr>")
