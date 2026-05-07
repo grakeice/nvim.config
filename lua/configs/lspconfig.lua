@@ -46,6 +46,15 @@ vim.lsp.config("vtsls", {
   },
 })
 
+vim.lsp.config("oxlint", {
+  root_markers = {
+    ".oxlintrc.json",
+    ".oxlintrc.jsonc",
+    "oxlint.config.ts",
+    "vite.config.ts",
+  },
+})
+
 vim.lsp.config("vue_ls", {
   settings = {
     css = {
@@ -109,6 +118,18 @@ vim.lsp.config("jsonls", {
       schemas = {
         { fileMatch = { "package.json" }, url = "https://json.schemastore.org/package.json" },
         { fileMatch = { "tsconfig*.json" }, url = "https://json.schemastore.org/tsconfig.json" },
+      },
+    },
+  },
+})
+
+vim.lsp.config("kotlin-lsp", {
+  settings = {
+    kotlin = {
+      completion = {
+        snippets = {
+          enabled = false,
+        },
       },
     },
   },

@@ -65,6 +65,7 @@ dofile(vim.g.base46_cache .. "statusline")
 
 require "options"
 require "autocmds"
+require "configs.textobjects"
 
 vim.schedule(function()
   require "mappings"

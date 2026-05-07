@@ -63,6 +63,24 @@ return {
     },
   },
   {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
+    init = function()
+      -- Disable entire built-in ftplugin mappings to avoid conflicts.
+      -- See https://github.com/neovim/neovim/tree/master/runtime/ftplugin for built-in ftplugins.
+      vim.g.no_plugin_maps = true
+
+      -- Or, disable per filetype (add as you like)
+      -- vim.g.no_python_maps = true
+      -- vim.g.no_ruby_maps = true
+      -- vim.g.no_rust_maps = true
+      -- vim.g.no_go_maps = true
+    end,
+    config = function()
+      -- put your config here
+    end,
+  },
+  {
     "nacro90/numb.nvim",
     event = "CmdlineEnter",
     config = function()
@@ -132,15 +150,15 @@ return {
       }
     end,
   },
-  {
-    "zbirenbaum/copilot-cmp",
-    dependencies = {
-      { "github/copilot.vim" },
-    },
-    config = function()
-      require("copilot_cmp").setup()
-    end,
-  },
+  -- {
+  --   "zbirenbaum/copilot-cmp",
+  --   dependencies = {
+  --     { "github/copilot.vim" },
+  --   },
+  --   config = function()
+  --     require("copilot_cmp").setup()
+  --   end,
+  -- },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     event = "CmdlineEnter",
@@ -219,6 +237,36 @@ return {
       vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
       vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
     end,
+  },
+  {
+    "delphinus/md-render.nvim",
+    version = "*",
+    dependencies = {
+      { "nvim-tree/nvim-web-devicons", version = "*" }, -- optional: file type icons in code blocks
+      { "delphinus/budoux.lua", version = "*" }, -- optional: CJK phrase-level line breaking
+    },
+    keys = {
+      { "<leader>mp", "<Plug>(md-render-preview)", desc = "Markdown preview (toggle)" },
+      { "<leader>mt", "<Plug>(md-render-preview-tab)", desc = "Markdown preview in tab (toggle)" },
+      { "<leader>md", "<Plug>(md-render-demo)", desc = "Markdown render demo" },
+    },
+    {
+      "HiPhish/rainbow-delimiters.nvim",
+      dependencies = "nvim-treesitter/nvim-treesitter",
+      event = "VeryLazy",
+      config = function()
+        require("rainbow-delimiters.setup").setup {
+          highlight = {
+            "RainbowDelimiterYellow",
+            "RainbowDelimiterBlue",
+            "RainbowDelimiterOrange",
+            "RainbowDelimiterGreen",
+            "RainbowDelimiterViolet",
+            "RainbowDelimiterCyan",
+          },
+        }
+      end,
+    },
   },
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
