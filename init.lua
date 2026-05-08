@@ -32,6 +32,51 @@ if vim.g.vscode then
     vim.lsp.buf.format()
   end, { desc = "Format file" })
 
+  -- #region 見た目通りのカーソル移動
+  local vscode = require "vscode-neovim"
+  local mappings = {
+    up = "k",
+    down = "j",
+    wrappedLineStart = "0",
+    wrappedLineFirstNonWhitespaceCharacter = "^",
+    wrappedLineEnd = "$",
+  }
+
+  local function moveCursor(to, select)
+    return function()
+      local mode = vim.api.nvim_get_mode()
+      if mode.mode == "V" or mode.mode == "" then
+        return mappings[to]
+      end
+
+      vscode.action("cursorMove", {
+        args = {
+          {
+            to = to,
+            by = "wrappedLine",
+            value = vim.v.count1,
+            select = select,
+          },
+        },
+      })
+      return "<Ignore>"
+    end
+  end
+
+  map("n", "k", moveCursor "up", { expr = true })
+  map("n", "j", moveCursor "down", { expr = true })
+
+  map("v", "k", moveCursor("up", true), { expr = true })
+  map("v", "j", moveCursor("down", true), { expr = true })
+
+  map("n", "<Up>", moveCursor "up", { expr = true })
+  map("n", "<Down>", moveCursor "down", { expr = true })
+
+  map("v", "<Up>", moveCursor("up", true), { expr = true })
+  map("v", "<Down>", moveCursor("down", true), { expr = true })
+  -- #endregion
+
+  -- これ以降の処理を読み込まない
   return
 end
 

@@ -1,3 +1,4 @@
+local lazy = require "lazy"
 return {
   {
     "stevearc/conform.nvim",
@@ -47,6 +48,8 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    build = ":TSUpdate",
     opts = {
       ensure_installed = {
         "vim",
